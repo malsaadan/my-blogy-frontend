@@ -43,11 +43,11 @@ class Articles extends React.Component {
         );
 
         // If the request was successful then add the new article to the end of the articles array so that we can see it in the page
-        
+
         // Save the array that was passed as props in a variable
         const articles = this.props.articles;
         // push the new article to the end of the articles array
-        articles.push(article)
+        articles.push(article);
         // Update the articles array in the parent state
         this.props.setArticles(articles);
       })

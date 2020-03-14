@@ -1,4 +1,5 @@
 import React from "react";
+import "./AddArticle.css";
 
 export default class AddArticle extends React.Component {
   // Setting constructor to hold the article object's value to be added
@@ -13,19 +14,18 @@ export default class AddArticle extends React.Component {
 
   // A function to pass the new article object to the parent
   addArticle = () => {
-
     // Creating an object with the state values
     const article = {
       title: this.state.title,
       author: this.state.author,
-      content: this.state.content,
+      content: this.state.content
     };
 
     // Clearing text boxes
     this.setState({
-      title:'',
-      author:'',
-      content:'',
+      title: "",
+      author: "",
+      content: ""
     });
 
     // Passing the article object to the parent
@@ -55,13 +55,24 @@ export default class AddArticle extends React.Component {
   render() {
     return (
       <>
-        <label>Title</label>
-        <input className="title" onChange={this.handleInputBox} value={this.state.title}/>
-        <label>Author</label>
-        <input className="author" onChange={this.handleInputBox} value={this.state.author}/>
-        <label>Content</label>
-        <textarea onChange={this.handleInputBox} value={this.state.content}/>
+        <h3>Add a New Article</h3>
+        <label>Title:</label>
+        <input
+          className="title"
+          onChange={this.handleInputBox}
+          value={this.state.title}
+        />
+        <label>Author:</label>
+        <input
+          className="author"
+          onChange={this.handleInputBox}
+          value={this.state.author}
+        />
+        <label className="content">Content:</label>
+        <br />
+        <textarea onChange={this.handleInputBox} value={this.state.content} />
         <button onClick={this.addArticle}>Add Article!</button>
+        <hr />
       </>
     );
   }
