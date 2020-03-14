@@ -1,6 +1,7 @@
 import React from "react";
 import Article from "./article";
-import { getAllArticles, deleteArticleByID } from "../api";
+import { getAllArticles, addNewArticle, deleteArticleByID } from "../api";
+import AddArticle from "./AddArticle";
 
 class Articles extends React.Component {
   componentDidMount() {
@@ -33,6 +34,28 @@ class Articles extends React.Component {
       });
   };
 
+  addArticle = article => {
+    // Make an axios request
+    addNewArticle(article)
+      .then(response => {
+        console.log(
+          `The Article ${article.title} has been added successfully.`
+        );
+
+        // If the request was successful then add the new article to the end of the articles array so that we can see it in the page
+        
+        // Save the array that was passed as props in a variable
+        const articles = this.props.articles;
+        // push the new article to the end of the articles array
+        articles.push(article)
+        // Update the articles array in the parent state
+        this.props.setArticles(articles);
+      })
+      .catch(error => {
+        console.log("API ERROR: ", error);
+      });
+  };
+
   render() {
     let allArticles = <h4>No Articles</h4>;
 
@@ -52,6 +75,7 @@ class Articles extends React.Component {
 
     return (
       <>
+        <AddArticle addArticle={this.addArticle} />
         <h3>All Articles</h3>
         {allArticles}
       </>
