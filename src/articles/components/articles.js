@@ -1,6 +1,11 @@
 import React from "react";
 import Article from "./article";
-import { getAllArticles, addNewArticle, deleteArticleByID } from "../api";
+import {
+  getAllArticles,
+  addNewArticle,
+  editArticleByID,
+  deleteArticleByID
+} from "../api";
 import AddArticle from "./AddArticle";
 
 class Articles extends React.Component {
@@ -56,6 +61,34 @@ class Articles extends React.Component {
       });
   };
 
+  editArticle = (id, newArticle) => {
+    console.log(`Edit the Article with ID ${id}`);
+
+    // Make axios request
+    editArticleByID(id, newArticle)
+      .then(response => {
+        console.log(
+          `The Article with the ID ${id} has been updated successfully.`
+        );
+
+        // To update the list in the UI, I searched for the updated article in the articles list and then update the title, author and content of the article
+        const articles = this.props.articles;
+        articles.forEach((article, index) => {
+          if (article._id === id) {
+            articles[index].title = newArticle.title;
+            articles[index].author = newArticle.author;
+            articles[index].content = newArticle.content;
+          }
+        });
+
+        // Update the articles list in the parent to the new list we have just updated
+        this.props.setArticles(articles);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   render() {
     let allArticles = <h4>No Articles</h4>;
 
@@ -68,6 +101,7 @@ class Articles extends React.Component {
             content={article.content}
             id={article._id}
             deleteArticle={this.deleteArticle}
+            editArticle={this.editArticle}
             key={index}
           />
         );

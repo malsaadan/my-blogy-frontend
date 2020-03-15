@@ -2,7 +2,7 @@ input {
     margin-top: 2%;
     margin-right: 3%;
     margin-left: 1%;
-    padding: 4px 8px;
+    padding: 4px 24px;
 }
 
 .content {
@@ -11,8 +11,8 @@ input {
 }
 
 textarea {
-    height: 250px;
-    width: 350px;
+    height: 200px;
+    width: 420px;
     padding: 2%;
     overflow-y: scroll;
 }
